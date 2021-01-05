@@ -14,11 +14,12 @@ def wait_for(sec=2):
 
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"hr:e:p:",["requests=","email=","password="])
+  opts, args = getopt.getopt(sys.argv[1:],"hdr:e:p:",["requests=","email=","password=","debug"])
 except getopt.GetoptError:
   print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
 searches = 1
+debug = false
 for opt, arg in opts:
   print(opt+" = "+arg)
   if opt == '-h':
@@ -30,6 +31,8 @@ for opt, arg in opts:
     password = arg
   elif opt in ("-r", "--requests"):
     searches = int(arg)
+  elif opt in ("-d", "--debug"):
+    debug = true
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
@@ -47,16 +50,16 @@ try:
     elem = driver.find_element_by_name('loginfmt')
     elem.clear()
     elem.send_keys(email) # add your login email id
-    driver.save_screenshot('/tmp/login1.png')
+    driver.save_screenshot('/tmp/login1.png') if debug
     elem.send_keys(Keys.RETURN)
     wait_for(5)
     elem1 = driver.find_element_by_name('passwd')
     elem1.clear()
     elem1.send_keys(password) # add your password
-    driver.save_screenshot('/tmp/login2.png')
+    driver.save_screenshot('/tmp/login2.png') if debug
     elem1.send_keys(Keys.ENTER)
     wait_for(7)
-    driver.save_screenshot('/tmp/login3.png')
+    driver.save_screenshot('/tmp/login3.png') if debug
 
  
 except Exception as e:
@@ -72,7 +75,7 @@ for num, word in enumerate(words_list):
     print('{0}. URL : {1}'.format(str(num + 1), url_base + word))
     try:
         driver.get(url_base + word)
-        driver.save_screenshot('/tmp/sample_screenshot_'+str(num)+'.png')
+        driver.save_screenshot('/tmp/search_for_'+word+'_'+str(num)+'.png') if debug
         print('\t' + driver.find_element_by_tag_name('h2').text)
     except Exception as e1:
         print(e1)
