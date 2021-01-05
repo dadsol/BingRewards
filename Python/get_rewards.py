@@ -11,13 +11,13 @@ geckodriver_autoinstaller.install()
 def wait_for(sec=2):
     time.sleep(sec)
     
-def screenshot(webdriver, desc):
+def screenshot(desc):
     if debug:
         if mobile:
             m_d = "mobile"
         else:
             m_d = "desktop"
-        webdriver.save_screenshot('/tmp/'+m_d+desc+'.png')
+        driver.save_screenshot('/tmp/'+m_d+desc+'.png')
 
 try:
   opts, args = getopt.getopt(sys.argv[1:],"hdmr:e:p:",["mobile","requests=","email=","password=","debug"])
