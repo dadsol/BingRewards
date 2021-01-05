@@ -6,15 +6,13 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import geckodriver_autoinstaller
-
 geckodriver_autoinstaller.install()
 
 def wait_for(sec=2):
     time.sleep(sec)
 
-
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"hdr:e:p:",["requests=","email=","password=","debug"])
+  opts, args = getopt.getopt(sys.argv[1:],"hdmr:e:p:",["mobile","requests=","email=","password=","debug"])
 except getopt.GetoptError:
   print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
@@ -33,6 +31,8 @@ for opt, arg in opts:
     searches = int(arg)
   elif opt in ("-d", "--debug"):
     debug = true
+  elif opt in ("-m", "--mobile"):
+    mobile = true
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
@@ -40,6 +40,11 @@ words_list = random.sample(json.loads(response.text)['data'], searches)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
 profile = webdriver.FirefoxProfile()
+if mobile:
+    ua = "Mozilla/5.0 (Android 6.0.1; Mobile; rv:77.0) Gecko/77.0 Firefox/77.0"
+else:
+    ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 Safari/537.36 Edg/79.0.309.43"
+profile.set_preference("general.useragent.override",ua)
 options = webdriver.FirefoxOptions()
 options.headless = True
 driver = webdriver.Firefox(options=options, firefox_profile=profile)
@@ -61,14 +66,11 @@ try:
     wait_for(7)
     driver.save_screenshot('/tmp/login3.png') if debug
 
- 
 except Exception as e:
     print(e)
     wait_for(4)
 
-
 url_base = 'http://www.bing.com/search?q='
-
 wait_for(5)
 
 for num, word in enumerate(words_list):
