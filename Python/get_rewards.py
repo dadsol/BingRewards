@@ -17,7 +17,7 @@ def screenshot(webdriver, desc):
             m_d = "mobile"
         else:
             m_d = "desktop"
-        webdriver.save_screenshot('/tmp/'+m_d+desc'.png')
+        webdriver.save_screenshot('/tmp/'+m_d+desc+'.png')
 
 try:
   opts, args = getopt.getopt(sys.argv[1:],"hdmr:e:p:",["mobile","requests=","email=","password=","debug"])
