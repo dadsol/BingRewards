@@ -1,6 +1,7 @@
 import json
 import random
 import time
+import sys
 
 import requests
 from selenium import webdriver
@@ -13,13 +14,26 @@ def wait_for(sec=2):
     time.sleep(sec)
 
 
+try:
+  opts, args = getopt.getopt(argv,"he:p:",["email=","password="])
+except getopt.GetoptError:
+  print 'get_rewards_firefox_desktop.py -e <emailaddress> -p <password>'
+  sys.exit(2)
+for opt, arg in opts:
+  if opt == '-h':
+    print 'get_rewards_firefox_desktop.py -e <emailaddress> -p <password>'
+    sys.exit()
+  elif opt in ("-e", "--email"):
+    email = arg
+  elif opt in ("-p", "--password"):
+    password = arg
+  print ('email is ' + email)
+    
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
 words_list = random.sample(json.loads(response.text)['data'], 60)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
-email = ""
-password = ""
 profile = webdriver.FirefoxProfile()
 options = webdriver.FirefoxOptions()
 options.headless = True
