@@ -18,13 +18,12 @@ response = requests.get(randomlists_url)
 words_list = random.sample(json.loads(response.text)['data'], 60)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
-gecko_driver_path = "/home/runner/work/BingRewards/BingRewards/Python/"
 email = ""
 password = ""
 profile = webdriver.FirefoxProfile()
 options = webdriver.FirefoxOptions()
 options.headless = True
-driver = webdriver.Firefox(options=options, firefox_profile=profile, executable_path=gecko_driver_path)
+driver = webdriver.Firefox(options=options, firefox_profile=profile)
 
 try:
     driver.get("https://login.live.com/")
