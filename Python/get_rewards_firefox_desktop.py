@@ -19,6 +19,7 @@ try:
 except getopt.GetoptError:
   print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
+searches = 1
 for opt, arg in opts:
   if opt == '-h':
     print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
