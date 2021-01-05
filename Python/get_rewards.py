@@ -15,7 +15,7 @@ def screenshot(webdriver, desc):
     if debug:
         if mobile:
             m_d = "mobile"
-        else
+        else:
             m_d = "desktop"
         webdriver.save_screenshot('/tmp/'+m_d+desc'.png')
 
