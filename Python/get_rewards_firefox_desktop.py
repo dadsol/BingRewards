@@ -29,7 +29,7 @@ for opt, arg in opts:
   elif opt in ("-p", "--password"):
     password = arg
   elif opt in ("-r", "--requests"):
-    searches = arg
+    searches = int(arg)
   print ('email is ' + email)
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
