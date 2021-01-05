@@ -5,6 +5,9 @@ import time
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import geckodriver_autoinstaller
+
+geckodriver_autoinstaller.install()
 
 def wait_for(sec=2):
     time.sleep(sec)
@@ -15,21 +18,25 @@ response = requests.get(randomlists_url)
 words_list = random.sample(json.loads(response.text)['data'], 60)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
-
+gecko_driver_path = "/home/runner/work/BingRewards/BingRewards/Python/"
+email = ""
+password = ""
 profile = webdriver.FirefoxProfile()
-driver = webdriver.Firefox(firefox_profile=profile, executable_path='fullpath-to-geckodriver')
+options = webdriver.FirefoxOptions()
+options.headless = True
+driver = webdriver.Firefox(options=options, firefox_profile=profile, executable_path=gecko_driver_path)
 
 try:
     driver.get("https://login.live.com/")
     wait_for(10)
     elem = driver.find_element_by_name('loginfmt')
     elem.clear()
-    elem.send_keys("your-email-id") # add your login email id
+    elem.send_keys(email) # add your login email id
     elem.send_keys(Keys.RETURN)
     wait_for(5)
     elem1 = driver.find_element_by_name('passwd')
     elem1.clear()
-    elem1.send_keys("your_password") # add your password
+    elem1.send_keys(password) # add your password
     elem1.send_keys(Keys.ENTER)
     wait_for(7)
  
