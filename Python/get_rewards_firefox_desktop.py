@@ -28,7 +28,7 @@ for opt, arg in opts:
     email = arg
   elif opt in ("-p", "--password"):
     password = arg
-  elif opt in ("-r", "--requests):
+  elif opt in ("-r", "--requests"):
     searches = arg
   print ('email is ' + email)
     
