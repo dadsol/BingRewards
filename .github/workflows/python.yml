@@ -18,5 +18,5 @@ jobs:
           pip install selenium
           pip install geckodriver-autoinstaller
       - name: Run python script
-        run: python Python/get_rewards_firefox_desktop.py -e ${{ secrets.email }} -p ${{ secrets.password }}
+        run: python Python/get_rewards_firefox_desktop.py -e ${{ secrets.email }} -p ${{ secrets.password }} -r 1
       
