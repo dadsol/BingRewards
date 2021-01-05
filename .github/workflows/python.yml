@@ -16,7 +16,7 @@ jobs:
         run: python --version
       - name: Install prerequisites
         run: |
-          pip install request
+          pip install requests
           pip install selenium
       - name: Run python script
         run: python get_rewards_firefox_desktop.py
