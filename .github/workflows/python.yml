@@ -23,6 +23,7 @@ jobs:
         run: python Python/get_rewards.py -e ${{ secrets.email }} -p ${{ secrets.password }} -r 1 -m -d
       - name: Archive screenshots
         uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: screenshots
           path: /tmp/*.png
