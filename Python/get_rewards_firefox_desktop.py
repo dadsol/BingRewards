@@ -15,23 +15,25 @@ def wait_for(sec=2):
 
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"he:p:",["email=","password="])
+  opts, args = getopt.getopt(sys.argv[1:],"hre:p:",["requests=","email=","password="])
 except getopt.GetoptError:
-  print ('get_rewards_firefox_desktop.py -e <emailaddress> -p <password>')
+  print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
 for opt, arg in opts:
   if opt == '-h':
-    print ('get_rewards_firefox_desktop.py -e <emailaddress> -p <password>')
+    print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
     sys.exit()
   elif opt in ("-e", "--email"):
     email = arg
   elif opt in ("-p", "--password"):
     password = arg
+  elif opt in ("-r", "--requests):
+    searches = arg
   print ('email is ' + email)
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
-words_list = random.sample(json.loads(response.text)['data'], 60)
+words_list = random.sample(json.loads(response.text)['data'], searches)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
 profile = webdriver.FirefoxProfile()
