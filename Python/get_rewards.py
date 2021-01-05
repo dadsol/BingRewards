@@ -10,6 +10,14 @@ geckodriver_autoinstaller.install()
 
 def wait_for(sec=2):
     time.sleep(sec)
+    
+def screenshot(webdriver, desc):
+    if debug:
+        if mobile:
+            m_d = "mobile"
+        else
+            m_d = "desktop"
+        webdriver.save_screenshot('/tmp/'+m_d+desc'.png')
 
 try:
   opts, args = getopt.getopt(sys.argv[1:],"hdmr:e:p:",["mobile","requests=","email=","password=","debug"])
@@ -56,19 +64,16 @@ try:
     elem = driver.find_element_by_name('loginfmt')
     elem.clear()
     elem.send_keys(email) # add your login email id
-    if debug:
-        driver.save_screenshot('/tmp/login1.png')
+    screenshot('login1')
     elem.send_keys(Keys.RETURN)
     wait_for(2)
     elem1 = driver.find_element_by_name('passwd')
     elem1.clear()
     elem1.send_keys(password) # add your password
-    if debug:
-        driver.save_screenshot('/tmp/login2.png')
+    screenshot('login2')
     elem1.send_keys(Keys.ENTER)
     wait_for(5)
-    if debug:
-        driver.save_screenshot('/tmp/login3.png')
+    screenshot('login3')
 
 except Exception as e:
     print(e)
@@ -81,8 +86,7 @@ for num, word in enumerate(words_list):
     try:
         wait_for(3)
         driver.get(url_base + word)
-        if debug:
-            driver.save_screenshot('/tmp/search_for_'+word+'_'+str(num)+'.png')
+        screenshot('search_for_'+word+'_'+str(num))
         print('\t' + driver.find_element_by_tag_name('h2').text)
     except Exception as e1:
         print(e1)
