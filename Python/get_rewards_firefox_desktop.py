@@ -2,7 +2,6 @@ import json
 import random
 import time
 import getopt, sys
-
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -31,7 +30,6 @@ for opt, arg in opts:
     password = arg
   elif opt in ("-r", "--requests"):
     searches = int(arg)
-  print ('email is ' + email)
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
