@@ -15,7 +15,7 @@ def wait_for(sec=2):
 
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"hre:p:",["requests=","email=","password="])
+  opts, args = getopt.getopt(sys.argv[1:],"hr:e:p:",["requests=","email=","password="])
 except getopt.GetoptError:
   print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
