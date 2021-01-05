@@ -18,6 +18,7 @@ jobs:
         run: |
           pip install requests
           pip install selenium
+          pip install geckodriver-autoinstaller
       - name: Run python script
         run: python Python/get_rewards_firefox_desktop.py
       
