@@ -14,7 +14,7 @@ def wait_for(sec=2):
 try:
   opts, args = getopt.getopt(sys.argv[1:],"hdmr:e:p:",["mobile","requests=","email=","password=","debug"])
 except getopt.GetoptError:
-  print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
+  print ('get_rewards.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
 searches = 1
 debug = False
@@ -22,7 +22,7 @@ mobile = False
 for opt, arg in opts:
   print(opt+" = "+arg)
   if opt == '-h':
-    print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
+    print ('get_rewards.py -r 60 -e <emailaddress> -p <password>')
     sys.exit()
   elif opt in ("-e", "--email"):
     email = arg
