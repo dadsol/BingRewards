@@ -55,16 +55,19 @@ try:
     elem = driver.find_element_by_name('loginfmt')
     elem.clear()
     elem.send_keys(email) # add your login email id
-    driver.save_screenshot('/tmp/login1.png') if debug
+    if debug:
+        driver.save_screenshot('/tmp/login1.png')
     elem.send_keys(Keys.RETURN)
     wait_for(5)
     elem1 = driver.find_element_by_name('passwd')
     elem1.clear()
     elem1.send_keys(password) # add your password
-    driver.save_screenshot('/tmp/login2.png') if debug
+    if debug:
+        driver.save_screenshot('/tmp/login2.png')
     elem1.send_keys(Keys.ENTER)
     wait_for(7)
-    driver.save_screenshot('/tmp/login3.png') if debug
+    if debug:
+        driver.save_screenshot('/tmp/login3.png')
 
 except Exception as e:
     print(e)
@@ -77,7 +80,8 @@ for num, word in enumerate(words_list):
     print('{0}. URL : {1}'.format(str(num + 1), url_base + word))
     try:
         driver.get(url_base + word)
-        driver.save_screenshot('/tmp/search_for_'+word+'_'+str(num)+'.png') if debug
+        if debug:
+            driver.save_screenshot('/tmp/search_for_'+word+'_'+str(num)+'.png')
         print('\t' + driver.find_element_by_tag_name('h2').text)
     except Exception as e1:
         print(e1)
