@@ -1,0 +1,20 @@
+name: Python
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install prerequisites
+        run: |
+          pip install request
+          pip install selenium
+      - name: Run python script
+        run: python get_rewards_firefox_desktop.py
+      
