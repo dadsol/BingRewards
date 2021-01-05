@@ -17,7 +17,8 @@ except getopt.GetoptError:
   print ('get_rewards_firefox_desktop.py -r 60 -e <emailaddress> -p <password>')
   sys.exit(2)
 searches = 1
-debug = false
+debug = False
+mobile = False
 for opt, arg in opts:
   print(opt+" = "+arg)
   if opt == '-h':
@@ -30,9 +31,9 @@ for opt, arg in opts:
   elif opt in ("-r", "--requests"):
     searches = int(arg)
   elif opt in ("-d", "--debug"):
-    debug = true
+    debug = True
   elif opt in ("-m", "--mobile"):
-    mobile = true
+    mobile = True
     
 randomlists_url = "https://www.randomlists.com/data/words.json"
 response = requests.get(randomlists_url)
